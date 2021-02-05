@@ -1,4 +1,5 @@
 # Mga aking natapos na:
+- Main Docker compose file
 - Docker networking
 - Dokuwiki container
 - Site2 container
