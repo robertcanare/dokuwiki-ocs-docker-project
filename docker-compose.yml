@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+    iboss-dokuwiki:
+      container_name: dokuwiki
+      hostname: dokuwiki
+      image: php:7.4-apache
+      ports:
+        - 81:80
+      volumes:
+        - ./html:/var/www/html
+      networks:
+        - dockernetwork
+
+    test-apache:
+      container_name: test-apache
+      hostname: test-apache
+      image: php:7.4-apache
+      ports:
+        - 82:80
+      volumes:
+        - ./test-html:/var/www/html
+      networks:
+        - dockernetwork
+
+    reverse-proxy:
+      container_name: reverse-proxy
+      hostname: reverse
+      image: nginx
+      ports:
+        - 80:80
+      volumes:
+        - ./default.conf:/etc/nginx/conf.d/default.conf
+        - ./proxy.conf:/etc/nginx/includes/proxy.conf
+      networks:
+        - dockernetwork
+
+networks:
+    dockernetwork:
+
+
